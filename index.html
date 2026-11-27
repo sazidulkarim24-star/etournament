@@ -66,6 +66,48 @@ header.sc{box-shadow:0 6px 18px #0005}
 #adl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 14px 0}.a3{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 6px 12px;text-align:center;box-shadow:0 6px 16px rgba(0,0,0,.12);min-width:0}.a3p{width:70px;height:70px;margin:0 auto 10px;border-radius:50%;border:3px solid var(--g);box-shadow:0 0 0 5px rgba(120,200,40,.18);overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--line);font-size:28px;font-weight:800;color:var(--g)}.a3p img{width:100%;height:100%;object-fit:cover}.a3 b{display:block;font-size:14px;line-height:1.3;word-break:break-word}.a3r{color:var(--g);font-weight:700;font-size:12px;margin-top:4px;line-height:1.3}.a3c{display:inline-block;margin-top:8px;width:30px;height:30px;line-height:30px;border-radius:50%;background:var(--g);text-decoration:none;font-size:14px}
 .hb{grid-template-columns:repeat(3,1fr)}.hbx{height:80px}
 footer{margin-top:34px;padding:26px 16px 34px;background:linear-gradient(160deg,#10331a,#07120a);color:#eaf5e6;text-align:center;border-top:4px solid var(--g)}footer .ft-t{font-size:15px;font-weight:700;opacity:.85;margin-bottom:14px}footer .fi{display:flex;justify-content:center;gap:14px}footer .fb{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:12px;width:72px;color:#eaf5e6;text-decoration:none;cursor:pointer}footer .fb i{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.4)}footer .fb.off{opacity:1}footer svg{width:38px;height:38px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media(min-width:900px){
+body{max-width:1180px}
+header{padding:14px 24px!important}
+.poster{max-width:860px;margin-left:auto;margin-right:auto}
+.tick{margin-left:24px;margin-right:24px}
+.tabs{display:none}
+.slider{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;overflow:visible;scroll-snap-type:none;padding:0 24px}
+.slide{width:auto;padding:0}
+body>h2{margin-left:24px;margin-right:24px}
+.hint{margin-left:24px;margin-right:24px}
+.br{flex-direction:row;overflow-x:auto;align-items:stretch;gap:14px;padding:0 24px 18px}
+.col{display:grid;grid-template-columns:1fr;grid-template-rows:auto;grid-auto-rows:1fr;gap:10px;min-width:170px;flex:1 1 170px}
+.col>.m{align-self:center;width:100%!important;min-width:0!important;grid-column:auto!important;justify-self:stretch!important}
+.col .s{font-size:12.5px;padding:5px 8px}
+.champ{align-self:center;grid-column:auto;width:150px;height:150px;justify-self:center}
+.nbox{margin-left:24px;margin-right:24px}
+#adl{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));margin-left:24px;margin-right:24px}
+#sp{margin-left:24px!important;margin-right:24px!important}
+.mn{top:calc(env(safe-area-inset-top,0px) + 74px)}
+#mNav{left:max(12px,calc(50% - 590px + 20px))!important}
+#adm,#ps,#mod,#dr{max-width:760px}
+footer{margin-top:40px}
+}
+@media(min-width:1250px){.slider{grid-template-columns:repeat(3,1fr)}}
+#mb input,#mb textarea,#pk input{background:var(--card)!important;color:var(--t)!important;border:1px solid var(--line)!important}
+@media(min-width:640px){body{max-width:760px}}
+@media(min-width:900px){
+body{max-width:1120px}
+.poster{max-width:800px;width:calc(100% - 28px);margin-left:auto!important;margin-right:auto!important}
+.tabs{display:none}
+.slider{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;overflow:visible;padding:0 14px;scroll-snap-type:none}
+.slide{width:auto;padding:0}
+.br{flex-direction:row;overflow-x:auto;align-items:stretch;gap:16px;padding-bottom:16px}
+.col{display:flex;flex-direction:column;justify-content:space-around;flex:1 0 190px;gap:12px}
+.m:nth-child(2):last-child{width:100%;min-width:0}
+#adl{grid-template-columns:repeat(auto-fit,minmax(190px,220px));justify-content:center}
+#sp{max-width:560px;margin-left:auto!important;margin-right:auto!important}
+#mNav{left:calc((100vw - min(100vw,1120px))/2 + 12px)}
+#adm,#ps,#mod,#dr,#mb,#pk{max-width:760px!important}
+.nbox{max-width:560px;margin-left:auto;margin-right:auto}
+}
+@media(min-width:1280px){.slider{grid-template-columns:repeat(3,1fr)}}
 </style></head><body>
 <div id="prog"></div><header><button class="ic" onclick="tgMenu('nav')" aria-label="menu">☰</button><b id="hdName"></b></header><div id="mDot" class="mn"></div><div id="mNav" class="mn" style="left:12px;right:auto"></div>
 <div class="poster" id="hero"></div>
@@ -81,13 +123,15 @@ footer{margin-top:34px;padding:26px 16px 34px;background:linear-gradient(160deg,
 <footer id="ft"></footer>
 
 <div id="mod" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:19;overflow:auto;padding:14px;max-width:560px;margin:auto"></div>
+<div id="mb" class="adm" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:18;overflow:auto;padding:14px;max-width:720px;margin:auto"></div>
+<div id="pk" class="adm" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:22;overflow:auto;padding:14px;max-width:720px;margin:auto"></div>
 <div id="pin" style="display:none;position:fixed;inset:0;background:#000c;z-index:30;align-items:center;justify-content:center"><div class="card" style="width:min(320px,90%);text-align:center"><b id="pinT"></b><input id="pinI" type="password" style="width:100%;margin:12px 0;padding:10px;border-radius:10px;background:#0a1b0f;border:1px solid var(--line);color:var(--t);font:inherit;text-align:center"><div id="pinE" style="color:#ff6b6b;font-size:13px;min-height:18px"></div><div style="display:flex;gap:8px;justify-content:center;margin-top:6px"><button class="btn" onclick="pinGo()">ঠিক আছে</button><button class="btn" style="background:#ddd" onclick="$('pin').style.display='none'">বাতিল</button></div></div></div>
 <div id="pc" style="display:none;position:fixed;inset:0;background:#000e;z-index:20;overflow:auto;padding:14px;text-align:center"><div style="color:var(--m);font-size:13px;margin-bottom:8px">ছবি চেপে ধরে সেভ করুন</div><img id="pcImg" alt="" style="width:100%;max-width:520px;border-radius:12px"><div style="display:flex;gap:10px;justify-content:center;margin:12px 0"><button class="btn" onclick="pcSave()">⬇️ ডাউনলোড</button><button class="btn" onclick="pcShare()">শেয়ার</button><button class="btn" style="background:#ddd" onclick="$('pc').style.display='none'">বন্ধ</button></div></div>
 <div id="ps" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:18;overflow:auto;padding:14px;max-width:560px;margin:auto"></div>
 <div id="dr" style="display:none;position:fixed;inset:0;background:#000f;z-index:25;overflow:auto;padding:14px;max-width:560px;margin:auto"><div style="text-align:center;color:var(--g);font-weight:800;font-size:18px">🎲 গ্রুপ ড্র</div><div id="drCur" style="text-align:center;font-size:26px;font-weight:800;min-height:80px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:10px 0"></div><div id="drGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div><div style="text-align:center;margin:14px 0"><button class="btn" id="drBtn" onclick="drClick()">স্কিপ</button></div></div>
 <div id="adm" class="adm"><div class="row"><b style="flex:1;font-size:18px">অ্যাডমিন প্যানেল</b><button class="btn" onclick="closeAdm()">✓ বন্ধ</button></div>
 <div class="hint" style="margin:0 0 8px">টিমের নাম ও লোগো দিন, গ্রুপ ম্যাচের স্কোর দিন। নকআউটে চার্টে দলের ওপর ট্যাপ করলে বিজয়ী নির্ধারিত হবে ও অটো পরের ধাপে যাবে।</div>
-<div class="row"><b style="flex:1">দল সংখ্যা</b><select id="nsel" onchange="setN(+this.value)" style="background:#0a1b0f;color:var(--t);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit"><option>4</option><option>8</option><option>16</option><option>32</option><option>48</option></select></div><h2 style="margin-left:0">স্পন্সর নম্বর</h2><div id="spAdm"></div><h2 style="margin-left:0">🖼️ সাইটের নাম ও স্লাইড ছবি</h2><div id="cfgAdm"></div><div id="rhAdm"></div><h2 style="margin-left:0">👥 অ্যাডমিন পরিচয়</h2><div id="adAdm"></div><h2 style="margin-left:0">📞 ফুটার যোগাযোগ</h2><div id="ftAdm"></div><h2 style="margin-left:0">📢 নিউজ / নোটিশ (সর্বোচ্চ ২টি বাক্য)</h2><div id="nwAdm"></div><h2 style="margin-left:0">ℹ️ About Us লেখা</h2><textarea id="abAdm" rows="5" placeholder="আমাদের সম্পর্কে লিখুন" style="width:100%;border-radius:10px;padding:8px;font:inherit" onchange="S.ab=this.value;save()"></textarea><h2 style="margin-left:0">📸 গ্রুপ ফটোকার্ড</h2><button class="btn" style="width:100%;margin-bottom:10px" onclick="psOpen()">📸 ফটোকার্ড বানান (খেলার আপডেট / ফলাফল)</button><div id="pcBar" class="row" style="flex-wrap:wrap"></div><h2 style="margin-left:0">🎲 দল ইনপুট ও গ্রুপ ড্র</h2><textarea id="bulk" rows="7" placeholder="প্রতি লাইনে একটি দলের নাম লিখুন" style="width:100%;background:#0a1b0f;border:1px solid var(--line);color:var(--t);border-radius:10px;padding:8px;font:inherit"></textarea><div id="bulkE" style="color:#ff6b6b;font-size:13px;margin:4px 0"></div><div class="hint" style="margin:0 0 8px">ড্র করলে আগের স্কোর ও বিজয়ী মুছে যাবে। লোগো দলের নামের সাথে থাকে।</div><button class="btn" onclick="drawStart()">🎲 ড্র শুরু করুন</button><div id="admBody"></div><div class="hint" style="margin:14px 0 0">নকআউট স্কোর: গোল দিলে বেশি গোলের দল অটো পরের রাউন্ডে যাবে। ড্র হলে চার্টে দলের ওপর ট্যাপ করে বিজয়ী (পেনাল্টি) বেছে নিন।</div><div id="koBody"></div><button class="btn" id="svBtn" style="margin-top:14px;margin-right:10px" onclick="saveAll()">💾 সংরক্ষণ করুন</button><button class="btn" style="background:#ff6b6b;margin-top:14px" onclick="resetAll()">সব রিসেট</button></div>
+<div class="row"><b style="flex:1">দল সংখ্যা</b><select id="nsel" onchange="setN(+this.value)" style="background:#0a1b0f;color:var(--t);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit"><option>4</option><option>8</option><option>16</option><option>32</option><option>48</option></select></div><h2 style="margin-left:0">স্পন্সর নম্বর</h2><div id="spAdm"></div><h2 style="margin-left:0">🖼️ সাইটের নাম ও স্লাইড ছবি</h2><div id="cfgAdm"></div><div id="rhAdm"></div><h2 style="margin-left:0">👥 অ্যাডমিন পরিচয়</h2><div id="adAdm"></div><h2 style="margin-left:0">📞 ফুটার যোগাযোগ</h2><div id="ftAdm"></div><h2 style="margin-left:0">📢 নিউজ / নোটিশ (সর্বোচ্চ ২টি বাক্য)</h2><div id="nwAdm"></div><h2 style="margin-left:0">ℹ️ About Us লেখা</h2><textarea id="abAdm" rows="5" placeholder="আমাদের সম্পর্কে লিখুন" style="width:100%;border-radius:10px;padding:8px;font:inherit" onchange="S.ab=this.value;save()"></textarea><h2 style="margin-left:0">📸 গ্রুপ ফটোকার্ড</h2><button class="btn" style="width:100%;margin-bottom:10px" onclick="psOpen()">📸 ফটোকার্ড বানান (খেলার আপডেট / ফলাফল)</button><div id="pcBar" class="row" style="flex-wrap:wrap"></div><h2 style="margin-left:0">🎲 দল ইনপুট ও গ্রুপ ড্র</h2><textarea id="bulk" rows="7" placeholder="প্রতি লাইনে একটি দলের নাম লিখুন" style="width:100%;background:#0a1b0f;border:1px solid var(--line);color:var(--t);border-radius:10px;padding:8px;font:inherit"></textarea><div id="bulkE" style="color:#ff6b6b;font-size:13px;margin:4px 0"></div><div class="hint" style="margin:0 0 8px">ড্র করলে আগের স্কোর ও বিজয়ী মুছে যাবে। লোগো দলের নামের সাথে থাকে।</div><button class="btn" style="margin-bottom:8px" onclick="pkBulk()">👥 সদস্য থেকে বাছাই করুন</button> <button class="btn" onclick="drawStart()">🎲 ড্র শুরু করুন</button><div id="admBody"></div><div class="hint" style="margin:14px 0 0">নকআউট স্কোর: গোল দিলে বেশি গোলের দল অটো পরের রাউন্ডে যাবে। ড্র হলে চার্টে দলের ওপর ট্যাপ করে বিজয়ী (পেনাল্টি) বেছে নিন।</div><div id="koBody"></div><button class="btn" id="svBtn" style="margin-top:14px;margin-right:10px" onclick="saveAll()">💾 সংরক্ষণ করুন</button><button class="btn" style="background:#ff6b6b;margin-top:14px" onclick="resetAll()">সব রিসেট</button></div>
 
 <script>
 const ALL="ABCDEFGHIJKL".split(""),PAIRS=[[0,1],[2,3],[0,2],[1,3],[0,3],[1,2]],RNA=["রাউন্ড ৩২","রাউন্ড ১৬","কোয়ার্টার","সেমি","ফাইনাল"];
@@ -165,7 +209,7 @@ function openAdm(){let p=null;try{p=localStorage.getItem("etpin")}catch(e){}pinM
 function pinGo(){const v=$("pinI").value;let p=null;try{p=localStorage.getItem("etpin")}catch(e){}
  if(pinMode=="set"){if(v.length<4){$("pinE").textContent="কমপক্ষে ৪ অক্ষর দিন";return}try{localStorage.setItem("etpin",v)}catch(e){}}
  else if(v!==p){$("pinE").textContent="ভুল পিন";return}
- $("pin").style.display="none";loggedIn=true;try{sessionStorage.setItem("etl","1")}catch(e){}if(pinWant=="panel")openAdm2();else if(pinWant=="studio")psOpen();else toast("✓ লগইন হয়েছে")}
+ $("pin").style.display="none";loggedIn=true;try{sessionStorage.setItem("etl","1")}catch(e){}if(pinWant=="panel")openAdm2();else if(pinWant=="studio")psOpen();else if(pinWant=="members")mbOpen();else toast("✓ লগইন হয়েছে")}
 function pcBar(){$("pcBar").innerHTML=G.map((g,i)=>`<button class="btn" onclick="card(${i})">${g}</button>`).join("")}
 const ldImg=u=>new Promise(r=>{if(!u)return r(null);const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=u});
 let _pcc=null;
@@ -192,7 +236,7 @@ const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math
 function drClick(){if(drRun)drSkip=true;else $("dr").style.display="none"}
 async function drawStart(){const names=$("bulk").value.split("\n").map(s=>s.trim()).filter(Boolean);
  if(names.length!=S.n){$("bulkE").textContent=`ঠিক ${S.n}টি নাম দিন (এখন ${names.length}টি)`;return}
- $("bulkE").textContent="";if(drRun)return;const old={};S.t.forEach(t=>{if(t.l)old[t.n]=t.l});
+ $("bulkE").textContent="";if(drRun)return;const old={};S.t.forEach(t=>{if(t.l)old[t.n]=t.l});(S.mb||[]).forEach(m=>{if(m.u&&m.n)old[m.n]=m.u});
  const order=shuf(names);let seq=[];for(let c=0;c<S.n/NG;c++)seq=seq.concat(shuf([...Array(NG).keys()]));
  const res=order.map((n,k)=>({n,g:seq[k]}));
  drRun=true;drSkip=false;$("dr").style.display="block";$("drBtn").textContent="স্কিপ";
@@ -203,7 +247,7 @@ async function drawStart(){const names=$("bulk").value.split("\n").map(s=>s.trim
   $("drCur").innerHTML=`${esc(r.n)} <span style="color:var(--g)">→ গ্রুপ ${G[r.g]}</span>`;
   slots[r.g].push(r.n);$("dg"+G[r.g]).innerHTML=slots[r.g].map(n=>`<div style="padding:3px 0;font-size:14px">${esc(n)}</div>`).join("");
   if(!drSkip)await sleep(500)}
- S.t=slots.flat().map(n=>({n,l:old[n]||""})).concat(S.t.slice(S.n));S.sc={};S.w={};S.ks={};save();
+ S.t=slots.flat().map(n=>{const m=(S.mb||[]).find(x=>x.n==n);return{n,l:old[n]||"",mid:m?m.id:undefined}}).concat(S.t.slice(S.n));S.sc={};S.w={};S.ks={};save();
  drRun=false;$("drCur").textContent="✅ ড্র সম্পন্ন!";$("drBtn").textContent="বন্ধ";admBody();render()}
 function saveAll(){if(document.activeElement)document.activeElement.blur();setTimeout(()=>{save();render();const b=$("svBtn");b.textContent="✓ সংরক্ষিত হয়েছে";setTimeout(()=>{b.textContent="💾 সংরক্ষণ করুন"},1800)},60)}
 async function card(gi){if(!S.admin)return;
@@ -341,9 +385,9 @@ function hb(i){if(i==0)scrollTo({top:0,behavior:"smooth"});else if(i==2)goTo("#u
  else if(i==4){const c=S.cfg||{n1:"E TOURNAMENT",n2:"COUNCIL"};openMod("ℹ️ About Us",`<div class="card" style="white-space:pre-wrap;line-height:1.75"><b>${esc(c.n1)} ${esc(c.n2||"")}</b>\n\n${esc(S.ab||"আমরা ই-ফুটবল টুর্নামেন্ট আয়োজন করি। ফেয়ার প্লে, সুস্থ প্রতিযোগিতা ও আনন্দই আমাদের লক্ষ্য।")}</div>`)}}
 function tgMenu(k){const el=$("mNav"),was=el.style.display=="block";closeMenu();if(was)return;
  const lt=document.documentElement.dataset.theme=="light",I=p=>`<svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-right:12px;vertical-align:-4px">${p}</svg>`;
- const P={home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>',gal:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5-5 4 4 3-3 4 4"/>',ev:'<rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/><path d="M8 14h2M12 14h2M8 17h2"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".7" fill="currentColor"/>',ph:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/>',moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5Z"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',ad:'<path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/>',cam:'<path d="M4 8h3l1.5-2.5h7L17 8h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/>',out:'<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="m10 8-4 4 4 4M6 12h10"/>'};
+ const P={home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>',gal:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5-5 4 4 3-3 4 4"/>',ev:'<rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/><path d="M8 14h2M12 14h2M8 17h2"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".7" fill="currentColor"/>',ph:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/>',moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5Z"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',ad:'<path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/>',us:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c.5-3.5 3-5.5 6-5.5s5.5 2 6 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14.7c2.6.2 4.2 1.9 4.5 4.8"/>',cam:'<path d="M4 8h3l1.5-2.5h7L17 8h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/>',out:'<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="m10 8-4 4 4 4M6 12h10"/>'};
  const B=(f,i,t)=>`<button onclick="${f}">${I(P[i])}${t}</button>`;
- el.innerHTML=B("mTheme()",lt?"moon":"sun",lt?"ডার্ক মোড":"হোয়াইট মোড")+B("mAdmin()","ad","এডমিন")+B("mStudio()","cam","ফটোকার্ড বানান")+(loggedIn?B("mLogin()","out","লগআউট"):"");
+ el.innerHTML=B("mTheme()",lt?"moon":"sun",lt?"ডার্ক মোড":"হোয়াইট মোড")+B("mAdmin()","ad","এডমিন")+B("mMembers()","us","সদস্য")+B("mStudio()","cam","ফটোকার্ড বানান")+(loggedIn?B("mLogin()","out","লগআউট"):"");
  el.style.display="block"}
 function go(i){const s=$("slider");s.scrollTo({left:i*s.clientWidth,behavior:"smooth"})}
 function pick(r,i,s){const k=r+"-"+i;S.w[k]=S.w[k]===s?undefined:s;if(S.w[k]===undefined)delete S.w[k];
@@ -351,7 +395,7 @@ function pick(r,i,s){const k=r+"-"+i;S.w[k]=S.w[k]===s?undefined:s;if(S.w[k]===u
  let rr=r+1,ii=i>>1;while(rr<R){delete S.w[rr+"-"+ii];if(S.ks)delete S.ks[rr+"-"+ii];rr++;ii>>=1}save();render()}
 function openAdm2(){S.admin=true;$("bulk").value=S.t.slice(0,S.n).map(t=>t.n).join("\n");$("nsel").value=S.n;$("adm").style.display="block";admBody();render()}
 function closeAdm(){S.admin=false;$("adm").style.display="none";save();render()}
-function admBody(){koAll();spAdm();pcBar();cfgAdm();rhAdm();upAdm();adAdm();nwAdm();abAdm();ftAdm();$("admBody").innerHTML=G.map((g,gi)=>`<h2 style="margin-left:0">গ্রুপ ${g}</h2>`+tms(gi).map((t,k)=>{const idx=gi*4+k;return`<div class="row"><label class="up">${t.l?`<img src="${t.l}">`:"📷"}<input type="file" accept="image/*" onchange="logo(${idx},this)"></label><input type="text" value="${t.n}" onchange="S.t[${idx}].n=this.value;save();render()"></div>`}).join("")+
+function admBody(){koAll();spAdm();pcBar();cfgAdm();rhAdm();upAdm();adAdm();nwAdm();abAdm();ftAdm();$("admBody").innerHTML=G.map((g,gi)=>`<h2 style="margin-left:0">গ্রুপ ${g}</h2>`+tms(gi).map((t,k)=>{const idx=gi*4+k;return`<div class="row"><label class="up">${t.l?`<img src="${t.l}">`:"📷"}<input type="file" accept="image/*" onchange="logo(${idx},this)"></label>${(S.mb||[]).length?`<input type="text" readonly value="${esc(t.n)}" onclick="pkOne(${idx})" style="cursor:pointer" placeholder="সদস্য বাছাই করুন">`:`<input type="text" value="${t.n}" onchange="S.t[${idx}].n=this.value;save();render()">`}</div>`}).join("")+
  PAIRS.map((p,m)=>{const s=S.sc[g+m]||["",""],T=tms(gi);return`<div class="sc"><span>${T[p[0]].n}</span><span><input type="number" min="0" value="${s[0]}" onchange="sc('${g}',${m},0,this.value)"> - <input type="number" min="0" value="${s[1]}" onchange="sc('${g}',${m},1,this.value)"></span><span style="text-align:right">${T[p[1]].n}</span></div>`}).join("")).join("")}
 function sc(g,m,s,v){const k=g+m;S.sc[k]=S.sc[k]||["",""];S.sc[k][s]=v;save();render()}
 function logo(i,el){const f=el.files[0];if(!f)return;const im=new Image();im.onload=()=>{const c=document.createElement("canvas");c.width=c.height=384;const x=c.getContext("2d"),z=Math.min(im.width,im.height);x.drawImage(im,(im.width-z)/2,(im.height-z)/2,z,z,0,0,384,384);S.t[i].l=c.toDataURL("image/jpeg",.8);save();admBody();render()};im.src=URL.createObjectURL(f)}
@@ -471,5 +515,28 @@ async function finalMatch(){const res=PS.k=="res",A=S.t[PS.a],B=S.t[PS.b],[ia,ib
  finalFoot(x,"GRAND FINAL · E FOOTBALL TOURNAMENT 2.1");
  finalShow(c,"E-Tournament-Grand-Final.png")}
 hero();
+let mbQ="",pkCb=null,pkSel=new Set(),pkMulti=false,pkQ="";
+function mbMatch(m,q){q=String(q||"").trim().toLowerCase();return !q||[m.n,m.k,m.w].some(v=>String(v||"").toLowerCase().includes(q))}
+function mMembers(){closeMenu();mbOpen()}
+function mbOpen(){if(!loggedIn){pinWant="members";openAdm();return}$("mb").style.display="block";mbRender()}
+function mbRender(){$("mb").innerHTML=`<div style="display:flex;align-items:center;margin-bottom:10px"><b style="flex:1;font-size:19px">👥 সদস্য (${(S.mb||[]).length})</b><button class="btn" onclick="$('mb').style.display='none'">✕ বন্ধ</button></div><input id="mbQ" type="text" placeholder="🔍 নাম / Konami ID / WhatsApp দিয়ে খুঁজুন" value="${esc(mbQ)}" style="${inpS}" oninput="mbQ=this.value;mbList()"><button class="btn" style="width:100%;margin:10px 0" onclick="mbAdd()">+ সদস্য যোগ করুন</button><div id="mbl"></div><div style="height:30px"></div>`;mbList()}
+function mbList(){const a=(S.mb||[]).map((m,i)=>[m,i]).filter(x=>mbMatch(x[0],mbQ));
+ $("mbl").innerHTML=a.length?a.map(x=>{const m=x[0],i=x[1];return `<div class="card" style="margin-bottom:10px;display:flex;gap:10px;align-items:flex-start"><label class="up" style="width:64px;height:64px;flex:none;border-radius:50%">${m.u?`<img src="${m.u}" alt="">`:"📷"}<input type="file" accept="image/*" onchange="mbPhoto(${i},this)"></label><div style="flex:1;min-width:0;display:grid;gap:6px"><input type="text" placeholder="ব্যক্তির নাম" value="${esc(m.n)}" onchange="S.mb[${i}].n=this.value;save()"><input type="text" placeholder="Konami ID name" value="${esc(m.k)}" onchange="S.mb[${i}].k=this.value;save()"><input type="text" inputmode="tel" placeholder="WhatsApp নম্বর" value="${esc(m.w)}" onchange="S.mb[${i}].w=this.value;save()"></div><button class="btn" style="background:#ff6b6b;padding:8px 10px" onclick="mbDel(${i})">✕</button></div>`}).join(""):'<div class="card hint" style="margin:0">কোনো সদস্য পাওয়া যায়নি।</div>'}
+function mbAdd(){S.mb=S.mb||[];S.mb.unshift({id:"m"+Date.now().toString(36)+Math.floor(Math.random()*1e3),n:"",k:"",w:"",u:""});save();mbQ="";mbRender()}
+function mbDel(i){askC("এই সদস্যকে মুছে ফেলবেন?",()=>{S.mb.splice(i,1);save();mbRender()})}
+function mbPhoto(i,el){const f=el.files[0];if(!f)return;const im=new Image();im.onload=()=>{const c=document.createElement("canvas");c.width=c.height=256;const x=c.getContext("2d"),z=Math.min(im.width,im.height);x.drawImage(im,(im.width-z)/2,(im.height-z)/2,z,z,0,0,256,256);S.mb[i].u=c.toDataURL("image/jpeg",.78);save();mbList()};im.src=URL.createObjectURL(f)}
+function pkOpen(multi,sel,cb){pkMulti=multi;pkSel=new Set(sel||[]);pkCb=cb;pkQ="";const el=$("pk");
+ el.innerHTML=`<div style="display:flex;align-items:center;margin-bottom:10px"><b style="flex:1;font-size:18px">👥 সদস্য বাছাই</b><button class="btn" onclick="pkClose()">✕</button></div><input id="pkQ" type="text" placeholder="🔍 নাম / Konami ID / WhatsApp খুঁজুন" style="${inpS}" oninput="pkQ=this.value;pkList()"><div id="pkl" style="margin-top:10px"></div>${multi?`<div style="position:sticky;bottom:0;padding:10px 0;background:var(--bg)"><button class="btn" style="width:100%" id="pkOk" onclick="pkDone()"></button></div>`:""}`;el.style.display="block";pkList();setTimeout(()=>{const q=$("pkQ");if(q)q.focus()},60)}
+function pkList(){const a=(S.mb||[]).filter(m=>mbMatch(m,pkQ));
+ $("pkl").innerHTML=a.length?a.map(m=>{const on=pkSel.has(m.id);return `<div class="card" onclick="pkTap('${m.id}')" style="display:flex;gap:10px;align-items:center;margin-bottom:8px;cursor:pointer;${on?"border-color:var(--g);box-shadow:0 0 0 2px var(--g) inset":""}"><div style="width:46px;height:46px;flex:none;border-radius:50%;overflow:hidden;background:var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--g)">${m.u?`<img src="${m.u}" alt="" style="width:100%;height:100%;object-fit:cover">`:esc((m.n||"?")[0])}</div><div style="flex:1;min-width:0"><b>${esc(m.n)||"(নাম নেই)"}</b><div class="hint" style="margin:2px 0 0">${m.k?"🎮 "+esc(m.k):""}${m.w?" · 📱 "+esc(m.w):""}</div></div>${on?'<span style="font-size:22px">✅</span>':""}</div>`}).join(""):'<div class="card hint" style="margin:0">কোনো সদস্য পাওয়া যায়নি।</div>';
+ const ok=$("pkOk");if(ok)ok.textContent="✓ যোগ করুন ("+pkSel.size+")"}
+function pkTap(id){if(pkMulti){pkSel.has(id)?pkSel.delete(id):pkSel.add(id);pkList()}else{const f=pkCb;pkClose();f(id)}}
+function pkDone(){const f=pkCb;pkClose();f([...pkSel])}
+function pkClose(){$("pk").style.display="none"}
+function pkOne(idx){const used=new Set(S.t.slice(0,S.n).map((t,i)=>i!=idx&&t.mid).filter(Boolean));
+ pkOpen(false,[],id=>{if(used.has(id)){toast("এই সদস্য আগেই বসানো আছে");return}const m=(S.mb||[]).find(x=>x.id==id);if(!m)return;S.t[idx]={n:m.n||S.t[idx].n,l:m.u||S.t[idx].l||"",mid:m.id};save();admBody();render();toast("✓ "+(m.n||""))})}
+function pkBulk(){if(!(S.mb||[]).length){toast("আগে ☰ মেনু থেকে সদস্য যোগ করুন");return}
+ const cur=$("bulk").value.split("\n").map(s=>s.trim()).filter(Boolean),pre=S.mb.filter(m=>cur.includes(m.n)).map(m=>m.id);
+ pkOpen(true,pre,ids=>{const nm=ids.map(id=>S.mb.find(m=>m.id==id)).filter(Boolean).map(m=>m.n);$("bulk").value=nm.join("\n");toast(nm.length+" জন বাছাই হয়েছে")})}
 render();
 </script></body></html>
