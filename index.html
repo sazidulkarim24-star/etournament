@@ -140,7 +140,8 @@ function setup(){NG=S.n/4;G=ALL.slice(0,NG);M0=S.n==48?16:NG;R=Math.log2(M0)+1;R
 
 let S;try{S=JSON.parse(localStorage.getItem("et")||"null")}catch(e){}
 S=S||{t:Array.from({length:32},(_,i)=>({n:ALL[i>>2]+((i&3)+1)+" দল",l:""})),sc:{},w:{},admin:false,n:32};S.n=S.n||32;while(S.t.length<48){const i=S.t.length;S.t.push({n:ALL[i>>2]+((i&3)+1)+" দল",l:""})}
-const save=()=>{S._dirty=true;try{localStorage.setItem("et",JSON.stringify(S))}catch(e){}};
+var _chg=0,_pt=null,_pb=false;
+const save=()=>{S._dirty=true;_chg++;try{localStorage.setItem("et",JSON.stringify(S))}catch(e){}schedPub()};
 const $=id=>document.getElementById(id);
 const lg=t=>t.l?`<img class="lg" src="${t.l}">`:`<span class="lg">${(t.n||"?")[0]}</span>`;
 function table(g){const r=[0,1,2,3].map(i=>({i,p:0,w:0,d:0,l:0,gf:0,ga:0,pt:0}));let done=0;
@@ -543,15 +544,17 @@ function ghCfg(){let c={};try{c=JSON.parse(localStorage.getItem("etgh")||"{}")}c
  c.b=c.b||"main";return c}
 function ghSet(k,v){let c={};try{c=JSON.parse(localStorage.getItem("etgh")||"{}")}catch(e){}c[k]=String(v).trim();try{localStorage.setItem("etgh",JSON.stringify(c))}catch(e){}}
 function pubPayload(){const o=JSON.parse(JSON.stringify(S));delete o.mb;delete o.admin;delete o._dirty;o._v=Date.now();return o}
-function pubAdm(){const c=ghCfg();$("pubAdm").innerHTML=`<div class="card" style="margin-bottom:12px"><b>☁️ সবার জন্য প্রকাশ করুন</b><div class="hint" style="margin:6px 0">যা বদলান, "প্রকাশ করুন" চাপলে ভিউয়াররা ১–২ মিনিটে দেখবে। সদস্যদের WhatsApp নম্বর প্রকাশ হয় না।</div><div class="row"><input type="text" placeholder="রিপোজিটরি (username/repo)" value="${esc(c.r||"")}" style="${inpS}" onchange="ghSet('r',this.value)"></div><div class="row"><input type="text" placeholder="Branch (main)" value="${esc(c.b||"")}" style="${inpS}" onchange="ghSet('b',this.value)"><input type="password" placeholder="GitHub টোকেন" value="${esc(c.t||"")}" style="${inpS}" onchange="ghSet('t',this.value)"></div><div class="row"><button class="btn" onclick="pubGo()">📤 প্রকাশ করুন</button><button class="btn" style="background:var(--card);color:var(--t);border:1px solid var(--line)" onclick="pubDl()">⬇️ data.json</button></div><div id="pubSt" class="hint" style="margin:4px 0 0"></div>${S._dirty?'<div class="hint" style="margin:4px 0 0;color:#ff6b6b">⚠ অপ্রকাশিত পরিবর্তন আছে</div>':'<div class="hint" style="margin:4px 0 0">✓ সব পরিবর্তন প্রকাশিত</div>'}</div>`}
-async function pubGo(){const c=ghCfg(),st=$("pubSt");if(!c.r||!c.t){st.textContent="রিপোজিটরি ও টোকেন দিন";return}
- st.textContent="⏳ প্রকাশ হচ্ছে...";
+function pubAdm(){const c=ghCfg();$("pubAdm").innerHTML=`<div class="card" style="margin-bottom:12px"><b>☁️ সবার জন্য প্রকাশ করুন</b><div class="hint" style="margin:6px 0">যা বদলান, "প্রকাশ করুন" চাপলে ভিউয়াররা ১–২ মিনিটে দেখবে। সদস্যদের WhatsApp নম্বর প্রকাশ হয় না।</div><div class="row"><input type="text" placeholder="রিপোজিটরি (username/repo)" value="${esc(c.r||"")}" style="${inpS}" onchange="ghSet('r',this.value)"></div><div class="row"><input type="text" placeholder="Branch (main)" value="${esc(c.b||"")}" style="${inpS}" onchange="ghSet('b',this.value)"><input type="password" placeholder="GitHub টোকেন" value="${esc(c.t||"")}" style="${inpS}" onchange="ghSet('t',this.value)"></div><div class="row"><button class="btn" onclick="pubGo()">📤 প্রকাশ করুন</button><button class="btn" style="background:var(--card);color:var(--t);border:1px solid var(--line)" onclick="pubDl()">⬇️ data.json</button><button class="btn" style="background:var(--card);color:var(--t);border:1px solid var(--line)" onclick="ghSet('a',ghCfg().a==='0'?'1':'0');pubAdm()">${c.a==='0'?"⚪ অটো বন্ধ":"🟢 অটো প্রকাশ চালু"}</button></div><div id="pubSt" class="hint" style="margin:4px 0 0"></div>${S._dirty?'<div class="hint" style="margin:4px 0 0;color:#ff6b6b">⚠ অপ্রকাশিত পরিবর্তন আছে</div>':'<div class="hint" style="margin:4px 0 0">✓ সব পরিবর্তন প্রকাশিত</div>'}</div>`}
+async function pubGo(auto){if(_pb){clearTimeout(_pt);_pt=setTimeout(()=>pubGo(auto),3000);return}
+ const c=ghCfg(),st=$("pubSt")||{};if(!c.r||!c.t){st.textContent="রিপোজিটরি ও টোকেন দিন";return}
+ _pb=true;st.textContent="⏳ প্রকাশ হচ্ছে...";const my=_chg;
  try{const o=pubPayload(),b64=btoa(unescape(encodeURIComponent(JSON.stringify(o)))),u="https://api.github.com/repos/"+c.r+"/contents/data.json",H={Authorization:"Bearer "+c.t,Accept:"application/vnd.github+json"};
   let sha;const g=await fetch(u+"?ref="+encodeURIComponent(c.b||"main"),{headers:H});if(g.ok)sha=(await g.json()).sha;else if(g.status!=404)throw new Error("রিপোজিটরি পড়তে পারেনি ("+g.status+")");
   const r=await fetch(u,{method:"PUT",headers:H,body:JSON.stringify({message:"Update tournament data",content:b64,branch:c.b||"main",sha})});
   if(!r.ok)throw new Error("লিখতে পারেনি ("+r.status+")");
-  S._v=o._v;S._dirty=false;try{localStorage.setItem("et",JSON.stringify(S))}catch(e){}pubAdm();$("pubSt").textContent="✓ প্রকাশিত! ১–২ মিনিটে সবাই দেখবে";toast("✓ প্রকাশিত হয়েছে")}
- catch(e){st.textContent="❌ "+e.message+" — রিপোজিটরি/টোকেন যাচাই করুন"}}
+  S._v=o._v;if(_chg==my)S._dirty=false;try{localStorage.setItem("et",JSON.stringify(S))}catch(e){}_pb=false;
+  if($("pubAdm"))pubAdm();const e2=$("pubSt");if(e2)e2.textContent="✓ প্রকাশিত! ১–২ মিনিটে সবাই দেখবে";toast(auto===true?"☁️ নিজে থেকে প্রকাশ হয়েছে":"✓ প্রকাশিত হয়েছে");if(_chg!=my)schedPub()}
+ catch(e){_pb=false;st.textContent="❌ "+e.message+" — রিপোজিটরি/টোকেন যাচাই করুন";if(auto===true)toast("❌ প্রকাশ হয়নি, প্যানেলে দেখুন")}}
 async function pubDl(){const o=pubPayload(),b=new Blob([JSON.stringify(o)],{type:"application/json"}),fn="data.json";let ok=false;
  try{if(window.claude&&claude.use){const d=await claude.use("downloads");if(d){await d.save({filename:fn,data:b});ok=true}}}catch(e){if(e&&e.code=="declined")return}
  if(!ok){try{const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=fn;document.body.appendChild(a);a.click();a.remove();ok=true}catch(e){}}
@@ -560,5 +563,6 @@ async function loadRemote(){if(S.admin||S._dirty)return;try{const r=await fetch(
  const mb=S.mb;S=R;S.mb=mb;S.admin=false;S._dirty=false;while(S.t.length<48){const i=S.t.length;S.t.push({n:ALL[i>>2]+((i&3)+1)+" দল",l:""})}
  try{localStorage.setItem("et",JSON.stringify(S))}catch(e){}render();hero()}catch(e){}}
 loadRemote();setInterval(loadRemote,60000);
+function schedPub(){const c=ghCfg();if(!c.r||!c.t||c.a==='0'||!loggedIn)return;clearTimeout(_pt);_pt=setTimeout(()=>pubGo(true),4000)}
 render();
 </script></body></html>
